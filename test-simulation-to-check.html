@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test simulation to check</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .eunoia-credit-banner {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 12px 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 10000;
+        }
+        
+        .eunoia-credit-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .eunoia-credit-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .eunoia-credit-author {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+        
+        .eunoia-credit-author strong {
+            font-weight: 600;
+            color: #fbbf24;
+        }
+        
+        .eunoia-simulation-container {
+            /* Container for the actual simulation */
+        }
+    </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 60px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+        .badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+        #output {
+            margin-top: 30px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #3b82f6;
+            min-height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="eunoia-credit-banner">
+        <div class="eunoia-credit-content">
+            <div class="eunoia-credit-title">Test simulation to check</div>
+            <div class="eunoia-credit-author">Created by <strong>Lim Hwee Ke</strong> | Eunoia JC Physics</div>
+        </div>
+    </div>
+    
+    <div class="eunoia-simulation-container">
+        
+    <div class="container">
+        <h1>? Multi-Level Test Simulation</h1>
+        <div class="badge">H1 & H2 Physics</div>
+        <p>This simulation should appear on both H1 and H2 catalog pages!</p>
+        <button onclick="showMessage()">Click to Test</button>
+        <div id="output"></div>
+    </div>
+    
+    <script>
+        function showMessage() {
+            document.getElementById('output').textContent = '? System Working Perfectly!';
+        }
+    </script>
+
+    </div>
+    
+    <script>
+        function showMessage() {
+            document.getElementById('output').textContent = '? System Working Perfectly!';
+        }
+    </script>
+</body>
+</html>
