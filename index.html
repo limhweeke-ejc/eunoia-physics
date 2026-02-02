@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eunoia Physics Simulations</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .hero {
+            background: rgba(255,255,255,0.98);
+            padding: 80px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1e3a8a;
+            font-size: 52px;
+            margin: 0 0 15px 0;
+            font-weight: 800;
+        }
+        .subtitle {
+            color: #64748b;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        .stats {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .level-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        .level-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 36px rgba(0,0,0,0.18);
+        }
+        .level-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+        .sim-count {
+            font-size: 56px;
+            font-weight: 800;
+            color: #3b82f6;
+            margin: 20px 0;
+        }
+        .sim-label {
+            color: #64748b;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+        .view-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+        .view-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.5);
+        }
+        .info-section {
+            background: rgba(255,255,255,0.98);
+            padding: 50px;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .info-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .info-text {
+            color: #475569;
+            font-size: 18px;
+            line-height: 1.8;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>? Eunoia Physics Simulations</h1>
+        <div class="subtitle">Interactive Learning Tools for H1, H2 & H3 Physics</div>
+        <div class="subtitle" style="font-size: 18px; color: #94a3b8;">2026 Singapore-Cambridge A Level Syllabus</div>
+        <div class="stats">2 Interactive Simulations Available</div>
+    </div>
+    
+    <div class="container">
+        <div class="level-grid">
+
+            <div class="level-card">
+                <div class="level-title">H1 Physics</div>
+                <div class="sim-count">1</div>
+                <div class="sim-label">Simulation</div>
+                <a href="h1-physics-catalog.html" class="view-button">Explore H1 Physics ?</a>
+            </div>
+
+            <div class="level-card">
+                <div class="level-title">H2 Physics</div>
+                <div class="sim-count">1</div>
+                <div class="sim-label">Simulation</div>
+                <a href="h2-physics-catalog.html" class="view-button">Explore H2 Physics ?</a>
+            </div>
+
+            <div class="level-card">
+                <div class="level-title">H3 Physics</div>
+                <div class="sim-count">0</div>
+                <div class="sim-label">Simulations</div>
+                <a href="h3-physics-catalog.html" class="view-button">Explore H3 Physics ?</a>
+            </div>
+
+        </div>
+        
+        <div class="info-section">
+            <div class="info-title">About This Collection</div>
+            <div class="info-text">
+                This collection features interactive physics simulations created by Eunoia Junior College teachers 
+                for the 2026 Singapore-Cambridge A Level Physics syllabus. Each simulation is designed to help 
+                students visualize complex concepts and develop deeper understanding through hands-on exploration.
+                <br><br>
+                Teachers tag simulations with the appropriate level(s), so you'll find simulations organized by 
+                H1, H2, or H3 Physics. Many simulations are suitable for multiple levels.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
