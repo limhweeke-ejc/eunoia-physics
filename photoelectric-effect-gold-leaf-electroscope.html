@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photoelectric Effect Gold Leaf Electroscope</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .eunoia-credit-banner {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 12px 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 10000;
+        }
+        
+        .eunoia-credit-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .eunoia-credit-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .eunoia-credit-author {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+        
+        .eunoia-credit-author strong {
+            font-weight: 600;
+            color: #fbbf24;
+        }
+        
+        .eunoia-simulation-container {
+            /* Container for the actual simulation */
+        }
+    </style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #1e3c72;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .simulation-area {
+            flex: 2;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #canvas {
+            flex: 1;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+
+        .controls-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 350px;
+        }
+
+        .control-group {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .control-group h3 {
+            font-size: 16px;
+            color: #1e3c72;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #1e3c72;
+            padding-bottom: 8px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-negative {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+        }
+
+        .btn-positive {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+        }
+
+        .btn-neutral {
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+            color: white;
+        }
+
+        .btn-light {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            width: 100%;
+        }
+
+        .btn-light.active {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+
+        .slider-container {
+            margin: 15px 0;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #1e3c72;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #1e3c72;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .frequency-markers {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .info-display {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 10px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 13px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-weight: 700;
+            color: #1e3c72;
+        }
+
+        .charge-indicator {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .charge-positive {
+            background: #3498db;
+            color: white;
+        }
+
+        .charge-negative {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .charge-neutral {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .learning-note {
+            background: #fff3cd;
+            border-left: 4px solid #f39c12;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #856404;
+        }
+
+        .emission-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .emission-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #95a5a6;
+        }
+
+        .emission-dot.active {
+            background: #27ae60;
+            box-shadow: 0 0 12px #27ae60;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .region-label {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .region-ir {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .region-visible {
+            background: #f39c12;
+            color: white;
+        }
+
+        .region-uv {
+            background: #9b59b6;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="eunoia-credit-banner">
+        <div class="eunoia-credit-content">
+            <div class="eunoia-credit-title">Photoelectric Effect Gold Leaf Electroscope</div>
+            <div class="eunoia-credit-author">Created by <strong>Lim Hwee Ke</strong> | Eunoia JC Physics</div>
+        </div>
+    </div>
+    
+    <div class="eunoia-simulation-container">
+        
+    <div class="header">
+        <h1>? Photoelectric Effect: Gold Leaf Electroscope</h1>
+        <p>Explore how light frequency determines electron emission from charged metals</p>
+    </div>
+
+    <div class="main-container">
+        <div class="simulation-area">
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <div class="controls-panel">
+            <div class="control-group">
+                <h3>1. Charge the Electroscope</h3>
+                <div class="button-group">
+                    <button class="btn-negative" onclick="setCharge(-1)">? Negative</button>
+                    <button class="btn-positive" onclick="setCharge(1)">+ Positive</button>
+                    <button class="btn-neutral" onclick="setCharge(0)">? Neutral</button>
+                </div>
+                <div class="info-display">
+                    <div class="info-row">
+                        <span class="info-label">Current Charge:</span>
+                        <span class="charge-indicator" id="chargeDisplay">NEUTRAL</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Charge Level:</span>
+                        <span class="info-value" id="chargeMagnitude">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h3>2. Select Light Frequency</h3>
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span>Frequency: <span id="frequencyValue">5.0</span> ? 10?? Hz</span>
+                        <span id="regionLabel" class="region-label region-visible">VISIBLE</span>
+                    </div>
+                    <input type="range" id="frequencySlider" min="3" max="12" step="0.1" value="5">
+                    <div class="frequency-markers">
+                        <span>IR</span>
+                        <span>Visible</span>
+                        <span>UV</span>
+                    </div>
+                </div>
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span>Intensity: <span id="intensityValue">50</span>%</span>
+                    </div>
+                    <input type="range" id="intensitySlider" min="10" max="100" step="10" value="50">
+                </div>
+                <button class="btn-light" id="lightButton" onclick="toggleLight()">? Turn Light ON</button>
+            </div>
+
+            <div class="control-group">
+                <h3>Physics Parameters</h3>
+                <div class="info-display">
+                    <div class="info-row">
+                        <span class="info-label">Metal Used:</span>
+                        <span class="info-value">Zinc (Zn)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Threshold Frequency:</span>
+                        <span class="info-value">8.8 ? 10?? Hz</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Threshold Wavelength:</span>
+                        <span class="info-value">341 nm (UV)</span>
+                    </div>
+                </div>
+                <div class="emission-indicator">
+                    <div class="emission-dot" id="emissionDot"></div>
+                    <span style="font-size: 13px; color: #555;">
+                        <strong>Electrons Emitted:</strong> <span id="emissionCount">0</span>
+                    </span>
+                </div>
+                <div class="info-display" style="margin-top: 10px;">
+                    <div class="info-row">
+                        <span class="info-label">Emission Rate:</span>
+                        <span class="info-value" id="emissionRate">None</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="learning-note">
+                    <strong>Key Concepts:</strong><br>
+                    ? <strong>Frequency determines IF</strong> electrons are emitted<br>
+                    ? <strong>Intensity determines HOW MANY</strong> electrons are emitted<br>
+                    ? Only UV light (f ? 8.8?10?? Hz) can emit electrons from zinc<br>
+                    ? Only negative electroscopes discharge (electrons must be present to escape)<br>
+                    <br>
+                    <strong>? Try this experiment:</strong><br>
+                    1. Charge electroscope negatively<br>
+                    2. Set frequency to UV (>8.8)<br>
+                    3. Turn on light<br>
+                    4. Slowly increase intensity from 10% to 100%<br>
+                    5. Watch how emission rate changes!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Physics constants
+        const THRESHOLD_FREQ = 8.8; // 10^14 Hz for zinc
+        const MAX_CHARGE = 100;
+        const CHARGE_DECAY_RATE = 0.3;
+
+        // Simulation state
+        let state = {
+            charge: 0, // -100 to +100
+            chargeSign: 0, // -1, 0, or 1
+            frequency: 5.0, // 10^14 Hz
+            intensity: 50, // percentage
+            lightOn: false,
+            leafAngle: 0, // degrees from vertical
+            electrons: [],
+            emissionCount: 0,
+            animationFrame: 0
+        };
+
+        // Resize canvas
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Set charge
+        function setCharge(sign) {
+            state.chargeSign = sign;
+            state.charge = sign * MAX_CHARGE;
+            state.emissionCount = 0;
+            updateDisplay();
+        }
+
+        // Toggle light
+        function toggleLight() {
+            state.lightOn = !state.lightOn;
+            const btn = document.getElementById('lightButton');
+            btn.textContent = state.lightOn ? '? Turn Light OFF' : '? Turn Light ON';
+            btn.classList.toggle('active');
+        }
+
+        // Update frequency
+        document.getElementById('frequencySlider').addEventListener('input', (e) => {
+            state.frequency = parseFloat(e.target.value);
+            document.getElementById('frequencyValue').textContent = state.frequency.toFixed(1);
+            
+            // Update region label
+            const regionLabel = document.getElementById('regionLabel');
+            if (state.frequency < 4.3) {
+                regionLabel.textContent = 'INFRARED';
+                regionLabel.className = 'region-label region-ir';
+            } else if (state.frequency < 7.5) {
+                regionLabel.textContent = 'VISIBLE';
+                regionLabel.className = 'region-label region-visible';
+            } else {
+                regionLabel.textContent = 'ULTRAVIOLET';
+                regionLabel.className = 'region-label region-uv';
+            }
+        });
+
+        // Update intensity
+        document.getElementById('intensitySlider').addEventListener('input', (e) => {
+            state.intensity = parseInt(e.target.value);
+            document.getElementById('intensityValue').textContent = state.intensity;
+        });
+
+        // Update display
+        function updateDisplay() {
+            const chargeDisplay = document.getElementById('chargeDisplay');
+            const chargeMagnitude = document.getElementById('chargeMagnitude');
+            
+            if (state.chargeSign > 0) {
+                chargeDisplay.textContent = 'POSITIVE (+)';
+                chargeDisplay.className = 'charge-indicator charge-positive';
+            } else if (state.chargeSign < 0) {
+                chargeDisplay.textContent = 'NEGATIVE (?)';
+                chargeDisplay.className = 'charge-indicator charge-negative';
+            } else {
+                chargeDisplay.textContent = 'NEUTRAL';
+                chargeDisplay.className = 'charge-indicator charge-neutral';
+            }
+            
+            chargeMagnitude.textContent = Math.abs(state.charge).toFixed(0);
+            
+            // Update emission indicator
+            const emissionDot = document.getElementById('emissionDot');
+            const canEmit = state.lightOn && state.frequency >= THRESHOLD_FREQ && state.chargeSign < 0;
+            emissionDot.classList.toggle('active', canEmit);
+            
+            document.getElementById('emissionCount').textContent = state.emissionCount;
+            
+            // Update emission rate display
+            const emissionRateDisplay = document.getElementById('emissionRate');
+            if (canEmit && state.charge < 0) {
+                if (state.intensity >= 80) {
+                    emissionRateDisplay.textContent = 'Very High';
+                    emissionRateDisplay.style.color = '#e74c3c';
+                    emissionRateDisplay.style.fontWeight = '700';
+                } else if (state.intensity >= 60) {
+                    emissionRateDisplay.textContent = 'High';
+                    emissionRateDisplay.style.color = '#e67e22';
+                    emissionRateDisplay.style.fontWeight = '700';
+                } else if (state.intensity >= 40) {
+                    emissionRateDisplay.textContent = 'Medium';
+                    emissionRateDisplay.style.color = '#f39c12';
+                    emissionRateDisplay.style.fontWeight = '700';
+                } else if (state.intensity >= 20) {
+                    emissionRateDisplay.textContent = 'Low';
+                    emissionRateDisplay.style.color = '#3498db';
+                    emissionRateDisplay.style.fontWeight = '700';
+                } else {
+                    emissionRateDisplay.textContent = 'Very Low';
+                    emissionRateDisplay.style.color = '#95a5a6';
+                    emissionRateDisplay.style.fontWeight = '700';
+                }
+            } else {
+                emissionRateDisplay.textContent = 'None';
+                emissionRateDisplay.style.color = '#95a5a6';
+                emissionRateDisplay.style.fontWeight = '500';
+            }
+        }
+
+        // Physics simulation
+        function simulate() {
+            // Check if photoelectric effect occurs
+            const canEmit = state.lightOn && 
+                          state.frequency >= THRESHOLD_FREQ && 
+                          state.chargeSign < 0 &&
+                          state.charge < 0; // Must have negative charge remaining
+
+            if (canEmit) {
+                // Emit electrons based on intensity - instantaneous emission when above threshold
+                // Number of electrons emitted per frame is proportional to intensity
+                const electronsPerFrame = state.intensity / 50; // 10% = 0.2, 100% = 2 electrons per frame
+                
+                // Emit fractional electrons using probability for smooth animation
+                const wholeElectrons = Math.floor(electronsPerFrame);
+                const fractionalElectron = electronsPerFrame - wholeElectrons;
+                
+                // Always emit the whole number of electrons
+                for (let i = 0; i < wholeElectrons; i++) {
+                    emitElectron();
+                }
+                
+                // Emit fractional electron with probability
+                if (Math.random() < fractionalElectron) {
+                    emitElectron();
+                }
+            }
+            
+            function emitElectron() {
+                const capX = canvas.width * 0.35;
+                const capY = canvas.height * 0.44;
+                
+                state.electrons.push({
+                    x: capX + (Math.random() - 0.5) * 60,
+                    y: capY + (Math.random() - 0.5) * 20,
+                    vx: (Math.random() - 0.5) * 3,
+                    vy: -Math.random() * 4 - 2,
+                    life: 1.0
+                });
+                
+                // Decrease charge (lose electrons)
+                state.charge += CHARGE_DECAY_RATE;
+                if (state.charge > 0) {
+                    state.charge = 0;
+                    state.chargeSign = 0;
+                }
+                
+                state.emissionCount++;
+            }
+
+            // Update electrons
+            state.electrons = state.electrons.filter(e => {
+                e.x += e.vx;
+                e.y += e.vy;
+                e.life -= 0.01;
+                return e.life > 0 && e.y > -50;
+            });
+
+            // Update leaf angle based on charge
+            const targetAngle = Math.abs(state.charge) * 0.4; // Max 40 degrees
+            state.leafAngle += (targetAngle - state.leafAngle) * 0.1;
+        }
+
+        // Draw electroscope
+        function drawElectroscope() {
+            const centerX = canvas.width * 0.35;
+            const centerY = canvas.height * 0.5;
+
+            // Glass case
+            ctx.strokeStyle = '#34495e';
+            ctx.lineWidth = 3;
+            ctx.fillStyle = 'rgba(200, 220, 240, 0.3)';
+            ctx.beginPath();
+            ctx.roundRect(centerX - 80, centerY - 50, 160, 200, 10);
+            ctx.fill();
+            ctx.stroke();
+
+            // Metal cap
+            ctx.fillStyle = '#f39c12';
+            ctx.strokeStyle = '#e67e22';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.ellipse(centerX, centerY - 60, 50, 15, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            // Support rod
+            ctx.fillStyle = '#95a5a6';
+            ctx.fillRect(centerX - 5, centerY - 60, 10, 80);
+
+            // Gold leaf (stationary part)
+            ctx.fillStyle = '#f1c40f';
+            ctx.strokeStyle = '#f39c12';
+            ctx.lineWidth = 1;
+            ctx.fillRect(centerX - 3, centerY + 20, 6, 60);
+
+            // Gold leaf (movable part) - rotates based on charge
+            ctx.save();
+            ctx.translate(centerX, centerY + 20);
+            ctx.rotate((state.leafAngle * Math.PI) / 180);
+            ctx.fillStyle = '#f1c40f';
+            ctx.fillRect(0, 0, 3, 60);
+            ctx.restore();
+
+            // Charge symbols
+            if (state.chargeSign !== 0) {
+                ctx.font = 'bold 20px Arial';
+                ctx.fillStyle = state.chargeSign > 0 ? '#3498db' : '#e74c3c';
+                const symbol = state.chargeSign > 0 ? '+' : '?';
+                for (let i = 0; i < 3; i++) {
+                    ctx.fillText(symbol, centerX - 40 + i * 30, centerY + 50 + i * 20);
+                }
+            }
+
+            // Label
+            ctx.fillStyle = '#34495e';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Gold Leaf Electroscope', centerX, centerY + 170);
+            ctx.fillText('(Zinc metal cap)', centerX, centerY + 190);
+        }
+
+        // Draw light source
+        function drawLightSource() {
+            const lightX = canvas.width * 0.7;
+            const lightY = canvas.height * 0.15;
+            const capX = canvas.width * 0.35;
+            const capY = canvas.height * 0.44; // Target the actual metal cap position
+
+            // Draw light beam FIRST (behind the light source) when on
+            if (state.lightOn) {
+                // Determine color based on frequency
+                let rayColor, solidRayColor;
+                if (state.frequency < 4.3) {
+                    rayColor = 'rgba(220, 50, 50, 0.15)'; // IR - red
+                    solidRayColor = 'rgba(220, 50, 50, 0.6)';
+                } else if (state.frequency < 7.5) {
+                    rayColor = 'rgba(255, 200, 50, 0.2)'; // Visible - yellow
+                    solidRayColor = 'rgba(255, 200, 50, 0.7)';
+                } else {
+                    rayColor = 'rgba(150, 100, 255, 0.25)'; // UV - purple
+                    solidRayColor = 'rgba(150, 100, 255, 0.8)';
+                }
+
+                // Wide light beam cone
+                ctx.fillStyle = rayColor;
+                ctx.beginPath();
+                ctx.moveTo(lightX - 15, lightY - 10);
+                ctx.lineTo(capX - 50, capY - 30);
+                ctx.lineTo(capX + 50, capY + 10);
+                ctx.lineTo(lightX + 15, lightY + 10);
+                ctx.closePath();
+                ctx.fill();
+
+                // Multiple light rays
+                ctx.strokeStyle = solidRayColor;
+                ctx.lineWidth = 2;
+                for (let i = 0; i < 7; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(lightX - 10, lightY);
+                    const targetY = capY - 20 + i * 8;
+                    ctx.lineTo(capX + (i - 3) * 20, targetY);
+                    ctx.stroke();
+                }
+
+                // Bright center beam
+                ctx.strokeStyle = solidRayColor.replace(/[\d.]+\)/, '0.9)');
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.moveTo(lightX - 10, lightY);
+                ctx.lineTo(capX, capY);
+                ctx.stroke();
+
+                // Glow at impact point on cap
+                const impactGradient = ctx.createRadialGradient(capX, capY, 5, capX, capY, 40);
+                impactGradient.addColorStop(0, solidRayColor);
+                impactGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                ctx.fillStyle = impactGradient;
+                ctx.beginPath();
+                ctx.arc(capX, capY, 40, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Light bulb/source housing
+            ctx.fillStyle = '#34495e';
+            ctx.fillRect(lightX - 10, lightY - 25, 45, 50);
+            
+            // Light bulb aperture
+            ctx.fillStyle = state.lightOn ? '#fff9e6' : '#555';
+            ctx.strokeStyle = '#2c3e50';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(lightX, lightY, 25, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            if (state.lightOn) {
+                // Intense glow from source
+                let glowColor;
+                if (state.frequency < 4.3) {
+                    glowColor = 'rgba(255, 100, 100, '; // IR - red
+                } else if (state.frequency < 7.5) {
+                    glowColor = 'rgba(255, 220, 100, '; // Visible - yellow
+                } else {
+                    glowColor = 'rgba(180, 130, 255, '; // UV - purple
+                }
+
+                const gradient = ctx.createRadialGradient(lightX, lightY, 5, lightX, lightY, 35);
+                gradient.addColorStop(0, glowColor + '1.0)');
+                gradient.addColorStop(0.5, glowColor + '0.6)');
+                gradient.addColorStop(1, glowColor + '0)');
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(lightX, lightY, 35, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Bright center
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.beginPath();
+                ctx.arc(lightX, lightY, 12, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Directional indicator arrow
+            ctx.strokeStyle = '#34495e';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(lightX - 5, lightY);
+            ctx.lineTo(lightX - 40, lightY);
+            ctx.stroke();
+            // Arrow head
+            ctx.beginPath();
+            ctx.moveTo(lightX - 40, lightY);
+            ctx.lineTo(lightX - 35, lightY - 5);
+            ctx.lineTo(lightX - 35, lightY + 5);
+            ctx.closePath();
+            ctx.fillStyle = '#34495e';
+            ctx.fill();
+
+            // Label
+            ctx.fillStyle = '#34495e';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Light Source', lightX, lightY + 60);
+            ctx.font = '12px Arial';
+            ctx.fillText(state.lightOn ? '? ON' : '? OFF', lightX, lightY + 78);
+        }
+
+        // Draw electrons
+        function drawElectrons() {
+            state.electrons.forEach(e => {
+                ctx.fillStyle = `rgba(231, 76, 60, ${e.life})`;
+                ctx.beginPath();
+                ctx.arc(e.x, e.y, 5, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Electron symbol
+                ctx.fillStyle = `rgba(255, 255, 255, ${e.life})`;
+                ctx.font = 'bold 8px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('e?', e.x, e.y + 3);
+            });
+        }
+
+        // Main animation loop
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            simulate();
+            drawElectroscope();
+            drawLightSource();
+            drawElectrons();
+            updateDisplay();
+
+            state.animationFrame++;
+            requestAnimationFrame(animate);
+        }
+
+        // Start simulation
+        animate();
+        updateDisplay();
+    </script>
+
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Physics constants
+        const THRESHOLD_FREQ = 8.8; // 10^14 Hz for zinc
+        const MAX_CHARGE = 100;
+        const CHARGE_DECAY_RATE = 0.3;
+
+        // Simulation state
+        let state = {
+            charge: 0, // -100 to +100
+            chargeSign: 0, // -1, 0, or 1
+            frequency: 5.0, // 10^14 Hz
+            intensity: 50, // percentage
+            lightOn: false,
+            leafAngle: 0, // degrees from vertical
+            electrons: [],
+            emissionCount: 0,
+            animationFrame: 0
+        };
+
+        // Resize canvas
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Set charge
+        function setCharge(sign) {
+            state.chargeSign = sign;
+            state.charge = sign * MAX_CHARGE;
+            state.emissionCount = 0;
+            updateDisplay();
+        }
+
+        // Toggle light
+        function toggleLight() {
+            state.lightOn = !state.lightOn;
+            const btn = document.getElementById('lightButton');
+            btn.textContent = state.lightOn ? '? Turn Light OFF' : '? Turn Light ON';
+            btn.classList.toggle('active');
+        }
+
+        // Update frequency
+        document.getElementById('frequencySlider').addEventListener('input', (e) => {
+            state.frequency = parseFloat(e.target.value);
+            document.getElementById('frequencyValue').textContent = state.frequency.toFixed(1);
+            
+            // Update region label
+            const regionLabel = document.getElementById('regionLabel');
+            if (state.frequency < 4.3) {
+                regionLabel.textContent = 'INFRARED';
+                regionLabel.className = 'region-label region-ir';
+            } else if (state.frequency < 7.5) {
+                regionLabel.textContent = 'VISIBLE';
+                regionLabel.className = 'region-label region-visible';
+            } else {
+                regionLabel.textContent = 'ULTRAVIOLET';
+                regionLabel.className = 'region-label region-uv';
+            }
+        });
+
+        // Update intensity
+        document.getElementById('intensitySlider').addEventListener('input', (e) => {
+            state.intensity = parseInt(e.target.value);
+            document.getElementById('intensityValue').textContent = state.intensity;
+        });
+
+        // Update display
+        function updateDisplay() {
+            const chargeDisplay = document.getElementById('chargeDisplay');
+            const chargeMagnitude = document.getElementById('chargeMagnitude');
+            
+            if (state.chargeSign > 0) {
+                chargeDisplay.textContent = 'POSITIVE (+)';
+                chargeDisplay.className = 'charge-indicator charge-positive';
+            } else if (state.chargeSign < 0) {
+                chargeDisplay.textContent = 'NEGATIVE (?)';
+                chargeDisplay.className = 'charge-indicator charge-negative';
+            } else {
+                chargeDisplay.textContent = 'NEUTRAL';
+                chargeDisplay.className = 'charge-indicator charge-neutral';
+            }
+            
+            chargeMagnitude.textContent = Math.abs(state.charge).toFixed(0);
+            
+            // Update emission indicator
+            const emissionDot = document.getElementById('emissionDot');
+            const canEmit = state.lightOn && state.frequency >= THRESHOLD_FREQ && state.chargeSign < 0;
+            emissionDot.classList.toggle('active', canEmit);
+            
+            document.getElementById('emissionCount').textContent = state.emissionCount;
+            
+            // Update emission rate display
+            const emissionRateDisplay = document.getElementById('emissionRate');
+            if (canEmit && state.charge < 0) {
+                if (state.intensity >= 80) {
+                    emissionRateDisplay.textContent = 'Very High';
+                    emissionRateDisplay.style.color = '#e74c3c';
+                    emissionRateDisplay.style.fontWeight = '700';
+                } else if (state.intensity >= 60) {
+                    emissionRateDisplay.textContent = 'High';
+                    emissionRateDisplay.style.color = '#e67e22';
+                    emissionRateDisplay.style.fontWeight = '700';
+                } else if (state.intensity >= 40) {
+                    emissionRateDisplay.textContent = 'Medium';
+                    emissionRateDisplay.style.color = '#f39c12';
+                    emissionRateDisplay.style.fontWeight = '700';
+                } else if (state.intensity >= 20) {
+                    emissionRateDisplay.textContent = 'Low';
+                    emissionRateDisplay.style.color = '#3498db';
+                    emissionRateDisplay.style.fontWeight = '700';
+                } else {
+                    emissionRateDisplay.textContent = 'Very Low';
+                    emissionRateDisplay.style.color = '#95a5a6';
+                    emissionRateDisplay.style.fontWeight = '700';
+                }
+            } else {
+                emissionRateDisplay.textContent = 'None';
+                emissionRateDisplay.style.color = '#95a5a6';
+                emissionRateDisplay.style.fontWeight = '500';
+            }
+        }
+
+        // Physics simulation
+        function simulate() {
+            // Check if photoelectric effect occurs
+            const canEmit = state.lightOn && 
+                          state.frequency >= THRESHOLD_FREQ && 
+                          state.chargeSign < 0 &&
+                          state.charge < 0; // Must have negative charge remaining
+
+            if (canEmit) {
+                // Emit electrons based on intensity - instantaneous emission when above threshold
+                // Number of electrons emitted per frame is proportional to intensity
+                const electronsPerFrame = state.intensity / 50; // 10% = 0.2, 100% = 2 electrons per frame
+                
+                // Emit fractional electrons using probability for smooth animation
+                const wholeElectrons = Math.floor(electronsPerFrame);
+                const fractionalElectron = electronsPerFrame - wholeElectrons;
+                
+                // Always emit the whole number of electrons
+                for (let i = 0; i < wholeElectrons; i++) {
+                    emitElectron();
+                }
+                
+                // Emit fractional electron with probability
+                if (Math.random() < fractionalElectron) {
+                    emitElectron();
+                }
+            }
+            
+            function emitElectron() {
+                const capX = canvas.width * 0.35;
+                const capY = canvas.height * 0.44;
+                
+                state.electrons.push({
+                    x: capX + (Math.random() - 0.5) * 60,
+                    y: capY + (Math.random() - 0.5) * 20,
+                    vx: (Math.random() - 0.5) * 3,
+                    vy: -Math.random() * 4 - 2,
+                    life: 1.0
+                });
+                
+                // Decrease charge (lose electrons)
+                state.charge += CHARGE_DECAY_RATE;
+                if (state.charge > 0) {
+                    state.charge = 0;
+                    state.chargeSign = 0;
+                }
+                
+                state.emissionCount++;
+            }
+
+            // Update electrons
+            state.electrons = state.electrons.filter(e => {
+                e.x += e.vx;
+                e.y += e.vy;
+                e.life -= 0.01;
+                return e.life > 0 && e.y > -50;
+            });
+
+            // Update leaf angle based on charge
+            const targetAngle = Math.abs(state.charge) * 0.4; // Max 40 degrees
+            state.leafAngle += (targetAngle - state.leafAngle) * 0.1;
+        }
+
+        // Draw electroscope
+        function drawElectroscope() {
+            const centerX = canvas.width * 0.35;
+            const centerY = canvas.height * 0.5;
+
+            // Glass case
+            ctx.strokeStyle = '#34495e';
+            ctx.lineWidth = 3;
+            ctx.fillStyle = 'rgba(200, 220, 240, 0.3)';
+            ctx.beginPath();
+            ctx.roundRect(centerX - 80, centerY - 50, 160, 200, 10);
+            ctx.fill();
+            ctx.stroke();
+
+            // Metal cap
+            ctx.fillStyle = '#f39c12';
+            ctx.strokeStyle = '#e67e22';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.ellipse(centerX, centerY - 60, 50, 15, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            // Support rod
+            ctx.fillStyle = '#95a5a6';
+            ctx.fillRect(centerX - 5, centerY - 60, 10, 80);
+
+            // Gold leaf (stationary part)
+            ctx.fillStyle = '#f1c40f';
+            ctx.strokeStyle = '#f39c12';
+            ctx.lineWidth = 1;
+            ctx.fillRect(centerX - 3, centerY + 20, 6, 60);
+
+            // Gold leaf (movable part) - rotates based on charge
+            ctx.save();
+            ctx.translate(centerX, centerY + 20);
+            ctx.rotate((state.leafAngle * Math.PI) / 180);
+            ctx.fillStyle = '#f1c40f';
+            ctx.fillRect(0, 0, 3, 60);
+            ctx.restore();
+
+            // Charge symbols
+            if (state.chargeSign !== 0) {
+                ctx.font = 'bold 20px Arial';
+                ctx.fillStyle = state.chargeSign > 0 ? '#3498db' : '#e74c3c';
+                const symbol = state.chargeSign > 0 ? '+' : '?';
+                for (let i = 0; i < 3; i++) {
+                    ctx.fillText(symbol, centerX - 40 + i * 30, centerY + 50 + i * 20);
+                }
+            }
+
+            // Label
+            ctx.fillStyle = '#34495e';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Gold Leaf Electroscope', centerX, centerY + 170);
+            ctx.fillText('(Zinc metal cap)', centerX, centerY + 190);
+        }
+
+        // Draw light source
+        function drawLightSource() {
+            const lightX = canvas.width * 0.7;
+            const lightY = canvas.height * 0.15;
+            const capX = canvas.width * 0.35;
+            const capY = canvas.height * 0.44; // Target the actual metal cap position
+
+            // Draw light beam FIRST (behind the light source) when on
+            if (state.lightOn) {
+                // Determine color based on frequency
+                let rayColor, solidRayColor;
+                if (state.frequency < 4.3) {
+                    rayColor = 'rgba(220, 50, 50, 0.15)'; // IR - red
+                    solidRayColor = 'rgba(220, 50, 50, 0.6)';
+                } else if (state.frequency < 7.5) {
+                    rayColor = 'rgba(255, 200, 50, 0.2)'; // Visible - yellow
+                    solidRayColor = 'rgba(255, 200, 50, 0.7)';
+                } else {
+                    rayColor = 'rgba(150, 100, 255, 0.25)'; // UV - purple
+                    solidRayColor = 'rgba(150, 100, 255, 0.8)';
+                }
+
+                // Wide light beam cone
+                ctx.fillStyle = rayColor;
+                ctx.beginPath();
+                ctx.moveTo(lightX - 15, lightY - 10);
+                ctx.lineTo(capX - 50, capY - 30);
+                ctx.lineTo(capX + 50, capY + 10);
+                ctx.lineTo(lightX + 15, lightY + 10);
+                ctx.closePath();
+                ctx.fill();
+
+                // Multiple light rays
+                ctx.strokeStyle = solidRayColor;
+                ctx.lineWidth = 2;
+                for (let i = 0; i < 7; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(lightX - 10, lightY);
+                    const targetY = capY - 20 + i * 8;
+                    ctx.lineTo(capX + (i - 3) * 20, targetY);
+                    ctx.stroke();
+                }
+
+                // Bright center beam
+                ctx.strokeStyle = solidRayColor.replace(/[\d.]+\)/, '0.9)');
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.moveTo(lightX - 10, lightY);
+                ctx.lineTo(capX, capY);
+                ctx.stroke();
+
+                // Glow at impact point on cap
+                const impactGradient = ctx.createRadialGradient(capX, capY, 5, capX, capY, 40);
+                impactGradient.addColorStop(0, solidRayColor);
+                impactGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                ctx.fillStyle = impactGradient;
+                ctx.beginPath();
+                ctx.arc(capX, capY, 40, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Light bulb/source housing
+            ctx.fillStyle = '#34495e';
+            ctx.fillRect(lightX - 10, lightY - 25, 45, 50);
+            
+            // Light bulb aperture
+            ctx.fillStyle = state.lightOn ? '#fff9e6' : '#555';
+            ctx.strokeStyle = '#2c3e50';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(lightX, lightY, 25, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            if (state.lightOn) {
+                // Intense glow from source
+                let glowColor;
+                if (state.frequency < 4.3) {
+                    glowColor = 'rgba(255, 100, 100, '; // IR - red
+                } else if (state.frequency < 7.5) {
+                    glowColor = 'rgba(255, 220, 100, '; // Visible - yellow
+                } else {
+                    glowColor = 'rgba(180, 130, 255, '; // UV - purple
+                }
+
+                const gradient = ctx.createRadialGradient(lightX, lightY, 5, lightX, lightY, 35);
+                gradient.addColorStop(0, glowColor + '1.0)');
+                gradient.addColorStop(0.5, glowColor + '0.6)');
+                gradient.addColorStop(1, glowColor + '0)');
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(lightX, lightY, 35, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Bright center
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.beginPath();
+                ctx.arc(lightX, lightY, 12, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Directional indicator arrow
+            ctx.strokeStyle = '#34495e';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(lightX - 5, lightY);
+            ctx.lineTo(lightX - 40, lightY);
+            ctx.stroke();
+            // Arrow head
+            ctx.beginPath();
+            ctx.moveTo(lightX - 40, lightY);
+            ctx.lineTo(lightX - 35, lightY - 5);
+            ctx.lineTo(lightX - 35, lightY + 5);
+            ctx.closePath();
+            ctx.fillStyle = '#34495e';
+            ctx.fill();
+
+            // Label
+            ctx.fillStyle = '#34495e';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Light Source', lightX, lightY + 60);
+            ctx.font = '12px Arial';
+            ctx.fillText(state.lightOn ? '? ON' : '? OFF', lightX, lightY + 78);
+        }
+
+        // Draw electrons
+        function drawElectrons() {
+            state.electrons.forEach(e => {
+                ctx.fillStyle = `rgba(231, 76, 60, ${e.life})`;
+                ctx.beginPath();
+                ctx.arc(e.x, e.y, 5, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Electron symbol
+                ctx.fillStyle = `rgba(255, 255, 255, ${e.life})`;
+                ctx.font = 'bold 8px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('e?', e.x, e.y + 3);
+            });
+        }
+
+        // Main animation loop
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            simulate();
+            drawElectroscope();
+            drawLightSource();
+            drawElectrons();
+            updateDisplay();
+
+            state.animationFrame++;
+            requestAnimationFrame(animate);
+        }
+
+        // Start simulation
+        animate();
+        updateDisplay();
+    </script>
+</body>
+</html>
