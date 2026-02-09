@@ -39,6 +39,83 @@
             font-weight: 700;
             margin-top: 20px;
         }
+        .submit-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            padding: 16px 40px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 18px;
+            margin-top: 25px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+        }
+        .search-container {
+            max-width: 600px;
+            margin: 30px auto 0;
+            position: relative;
+        }
+        .search-box {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+        .search-box:focus {
+            border-color: #3b82f6;
+        }
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #94a3b8;
+        }
+        .search-results-msg {
+            text-align: center;
+            color: #64748b;
+            font-size: 15px;
+            margin-top: 10px;
+            min-height: 22px;
+        }
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 10px 24px;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            background: white;
+            color: #475569;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .filter-btn:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+        .filter-btn.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border-color: #3b82f6;
+        }
         .container {
             max-width: 1200px;
             margin: 50px auto;
@@ -46,21 +123,22 @@
         }
         .level-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            margin-bottom: 50px;
         }
         .level-card {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 40px 30px;
             transition: transform 0.3s, box-shadow 0.3s;
             text-align: center;
         }
         .level-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 36px rgba(0,0,0,0.18);
+        }
+        .level-card.hidden {
+            display: none;
         }
         .level-title {
             font-size: 32px;
@@ -95,6 +173,30 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(59, 130, 246, 0.5);
         }
+        .topic-levels {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .topic-level-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .badge-h1 { background: #dbeafe; color: #1e40af; }
+        .badge-h2 { background: #dcfce7; color: #166534; }
+        .badge-h3 { background: #fef3c7; color: #92400e; }
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+            font-size: 20px;
+            display: none;
+        }
         .info-section {
             background: rgba(255,255,255,0.98);
             padding: 50px;
@@ -117,6 +219,13 @@
             max-width: 800px;
             margin: 0 auto;
         }
+        @media (max-width: 768px) {
+            h1 { font-size: 32px; }
+            .subtitle { font-size: 18px; }
+            .level-grid { grid-template-columns: 1fr; }
+            .filter-container { gap: 8px; }
+            .filter-btn { padding: 8px 16px; font-size: 13px; }
+        }
     </style>
 </head>
 <body>
@@ -125,45 +234,115 @@
         <div class="subtitle">Interactive Learning Tools for H1, H2 & H3 Physics</div>
         <div class="subtitle" style="font-size: 18px; color: #94a3b8;">2026 Singapore-Cambridge A Level Syllabus</div>
         <div class="stats">1 Interactive Simulation Available</div>
+        <br>
+        <a href="[PASTE YOUR GOOGLE FORM URL HERE]" class="submit-btn" target="_blank">Submit Your Simulation</a>
+        <div class="search-container">
+            <span class="search-icon">&#128269;</span>
+            <input type="text" class="search-box" id="searchBox" placeholder="Search simulations by title, description, author, or topic..." oninput="handleSearch()">
+        </div>
+        <div class="search-results-msg" id="searchMsg"></div>
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterByLevel('all')">All Topics</button>
+            <button class="filter-btn" onclick="filterByLevel('H1 Physics')">H1 Physics</button>
+            <button class="filter-btn" onclick="filterByLevel('H2 Physics')">H2 Physics</button>
+            <button class="filter-btn" onclick="filterByLevel('H3 Physics')">H3 Physics</button>
+        </div>
     </div>
-    
+
     <div class="container">
-        <div class="level-grid">
+        <div class="level-grid" id="topicGrid">
 
-            <div class="level-card">
-                <div class="level-title">H1 Physics</div>
-                <div class="sim-count">0</div>
-                <div class="sim-label">Simulations</div>
-                <a href="h1-physics-catalog.html" class="view-button">Explore H1 Physics</a>
-            </div>
-
-            <div class="level-card">
-                <div class="level-title">H2 Physics</div>
+            <div class="level-card" data-topic="undefined" data-levels="H2 Physics">
+                <div class="level-title">undefined</div>
                 <div class="sim-count">1</div>
                 <div class="sim-label">Simulation</div>
-                <a href="h2-physics-catalog.html" class="view-button">Explore H2 Physics</a>
-            </div>
-
-            <div class="level-card">
-                <div class="level-title">H3 Physics</div>
-                <div class="sim-count">0</div>
-                <div class="sim-label">Simulations</div>
-                <a href="h3-physics-catalog.html" class="view-button">Explore H3 Physics</a>
+                <div class="topic-levels"><span class="topic-level-badge badge-h2">H2 Physics</span></div>
             </div>
 
         </div>
-        
+        <div class="no-results" id="noResults">No simulations found matching your search.</div>
+
         <div class="info-section">
             <div class="info-title">About This Collection</div>
             <div class="info-text">
-                This collection features interactive physics simulations created by Eunoia Junior College teachers 
-                for the 2026 Singapore-Cambridge A Level Physics syllabus. Each simulation is designed to help 
+                This collection features interactive physics simulations created by Eunoia Junior College teachers
+                for the 2026 Singapore-Cambridge A Level Physics syllabus. Each simulation is designed to help
                 students visualize complex concepts and develop deeper understanding through hands-on exploration.
                 <br><br>
-                Teachers tag simulations with the appropriate level(s), so you'll find simulations organized by 
+                Teachers tag simulations with the appropriate level(s), so you'll find simulations organized by
                 H1, H2, or H3 Physics. Many simulations are suitable for multiple levels.
             </div>
         </div>
     </div>
+
+    <script>
+        // Embedded simulation data for search
+        var simData = [{"title":"Photoelectric Effect Gold Leaf Electroscope","description":"Gold leaf electroscope. Options: positively charged vs negatively charged, intensity meter, frequency meter, visual of electrons escaping and gold leaf dropping. ","author":"Lim Hwee Ke","levels":"H2 Physics","url":"https://limhweeke-ejc.github.io/eunoia-physics/photoelectric-effect-gold-leaf-electroscope.html","topic":"undefined","subtopic":"Quantum Physics"}];
+        var topicMeta = {"undefined":{"levels":["H2 Physics"],"simCount":1}};
+        var activeLevel = 'all';
+
+        function handleSearch() {
+            var query = document.getElementById('searchBox').value.toLowerCase().trim();
+            var cards = document.querySelectorAll('.level-card');
+            var msg = document.getElementById('searchMsg');
+            var noResults = document.getElementById('noResults');
+
+            if (!query) {
+                // No search query - show all (respecting level filter)
+                cards.forEach(function(card) {
+                    if (activeLevel === 'all' || card.getAttribute('data-levels').indexOf(activeLevel) !== -1) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+                msg.textContent = '';
+                noResults.style.display = 'none';
+                return;
+            }
+
+            // Search through all simulations
+            var matchingTopics = {};
+            var totalMatches = 0;
+            simData.forEach(function(sim) {
+                var searchText = (sim.title + ' ' + sim.description + ' ' + sim.author + ' ' + sim.topic + ' ' + sim.subtopic).toLowerCase();
+                if (searchText.indexOf(query) !== -1) {
+                    // Check level filter
+                    if (activeLevel === 'all' || sim.levels.indexOf(activeLevel) !== -1) {
+                        matchingTopics[sim.topic] = true;
+                        totalMatches++;
+                    }
+                }
+            });
+
+            var visibleCount = 0;
+            cards.forEach(function(card) {
+                var topic = card.getAttribute('data-topic');
+                if (matchingTopics[topic]) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            msg.textContent = totalMatches + ' simulation' + (totalMatches !== 1 ? 's' : '') + ' found across ' + visibleCount + ' topic' + (visibleCount !== 1 ? 's' : '');
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        function filterByLevel(level) {
+            activeLevel = level;
+            // Update active button
+            var btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(function(btn) {
+                btn.classList.remove('active');
+                if ((level === 'all' && btn.textContent === 'All Topics') || btn.textContent === level) {
+                    btn.classList.add('active');
+                }
+            });
+            // Re-run search with new filter (or just filter if no search)
+            handleSearch();
+        }
+    </script>
 </body>
 </html>
